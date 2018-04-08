@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-lazy="false">
+	<class name="com.logicaldoc.ext.branding.Branding" table="ld_branding" where="ld_deleted=0">
+		<cache usage="read-write" />
+		<id name="id" type="long" column="ld_id" unsaved-value="0">
+			<generator class="hilo" />
+		</id>
+        <version name="recordVersion" column="ld_recordversion"  type="long" />  
+        <property name="lastModified" type="timestamp" column="ld_lastmodified" />
+		<property name="deleted" type="int" column="ld_deleted" not-null="true" />
+        <property name="tenantId" type="long" column="ld_tenantid" not-null="true" />
+
+        <property name="logo" type="text" column="ld_logo" />
+        <property name="logoHead" type="text" column="ld_logohead" />
+        <property name="logoOem" type="text" column="ld_logooem" />
+        <property name="logoHeadOem" type="text" column="ld_logoheadoem" />
+        <property name="favicon" type="text" column="ld_favicon" />
+        <property name="banner" type="text" column="ld_banner" />
+        <property name="css" type="text" column="ld_css" />
+        <property name="skin" type="string" column="ld_skin" length="255"/>
+        
+        <property name="product" type="string" column="ld_product" length="255" />
+        <property name="productName" type="string" column="ld_productname" length="255" />
+        <property name="vendor" type="string" column="ld_vendor" length="255" />
+        <property name="vendorCap" type="string" column="ld_vendorcap" length="255" />
+        <property name="vendorCountry" type="string" column="ld_vendorcountry" length="255" />
+        <property name="vendorCity" type="string" column="ld_vendorcity" length="255"/>
+        <property name="vendorAddress" type="string" column="ld_vendoraddress" length="1000" />
+        
+        <property name="support" type="string" column="ld_support" length="1000" />
+        <property name="sales" type="string" column="ld_sales" length="1000" />
+        <property name="help" type="string" column="ld_help" length="1000" />
+        <property name="bugs" type="string" column="ld_bugs" length="1000" />
+        <property name="url" type="string" column="ld_url" length="1000" />
+        <property name="forum" type="string" column="ld_forum" length="1000" />
+	</class>
+</hibernate-mapping>

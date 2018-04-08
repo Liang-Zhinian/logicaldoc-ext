@@ -1,0 +1,30 @@
+<?xml version="1.0" ?>
+<!DOCTYPE plugin PUBLIC "-//JPF//Java Plug-in Manifest 1.0" "http://jpf.sourceforge.net/plugin_1_0.dtd">
+<plugin id="logicaldoc-ext-core" version="7.7.5" class="com.logicaldoc.ext.ExtPlugin">
+	<requires>
+		<import plugin-id="logicaldoc-core" />
+	</requires>
+	
+  <!-- QUOTAS -->
+  <extension plugin-id="logicaldoc-core" point-id="Feature" id="f65">
+	    <parameter id="name" value="Feature_65" />
+  </extension>
+  <!-- MULTI_TENANT -->
+  <extension plugin-id="logicaldoc-core" point-id="Feature" id="f79">
+	    <parameter id="name" value="Feature_79" />
+  </extension>
+  <!-- BRANDING_STANDARD -->
+  <extension plugin-id="logicaldoc-core" point-id="Feature" id="f6">
+	    <parameter id="name" value="Feature_6" />
+  </extension>
+  <!-- BRANDING_LOGO -->
+  <extension plugin-id="logicaldoc-core" point-id="Feature" id="f38">
+	    <parameter id="name" value="Feature_38" />
+  </extension>
+  
+  
+  <extension plugin-id="logicaldoc-core" point-id="DocumentListener" id="counterListener">
+	    <parameter id="position" value="1" />
+	    <parameter id="class" value="com.logicaldoc.ext.DocumentListenerImpl" />
+  </extension>
+</plugin>
