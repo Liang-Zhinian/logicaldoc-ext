@@ -51,3 +51,13 @@ ld_support varchar(1000), ld_help varchar(1000), ld_bugs varchar(1000),
 ld_url varchar(1000), ld_forum varchar(1000), ld_sales varchar(1000), ld_skin varchar(255),
 ld_css text, primary key (ld_id));
 
+
+insert into hibernate_unique_key(tablename, next_hi) values ('ld_branding', 100);
+
+-- email notification message template
+insert into ld_messagetemplate (ld_id, ld_lastmodified, ld_deleted, ld_name, ld_type, ld_language, ld_subject, ld_body, ld_tenantid, ld_recordversion)
+values(40, CURRENT_TIMESTAMP,0,'quota.alert','system','en', '$product - $I18N.get(''quotaalert'')',
+'$I18N.format(''usagereachedthreshold'',$name)<br/><br/>
+#if($documents)$I18N.get(''documents''): <b>$documents</b><br/>#end
+#if($size)$I18N.get(''size''): <b>$size</b><br/>#end
+#if($users)$I18N.get(''users''): <b>$users</b><br/>#end',1,1);
