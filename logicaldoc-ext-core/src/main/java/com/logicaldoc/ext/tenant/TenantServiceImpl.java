@@ -38,6 +38,10 @@ public class TenantServiceImpl extends RemoteServiceServlet implements TenantSer
 	public static long MENU_BRANDING = -1150L;
 	public static long MENU_QUOTA = 1700L;
 
+	private boolean isBrandingStandardEnabled = true; // LicenseManager.getInstance().isEnabled("Feature_6");
+	private boolean isBrandingFullEnabled = true; // LicenseManager.getInstance().isEnabled("Feature_37");
+	private boolean isBrandingLogoEnabled = true; // LicenseManager.getInstance().isEnabled("Feature_38");
+
 	@Override
 	public void delete(long paramLong) throws ServerException {
 		ServiceUtil.checkMenu(getThreadLocalRequest(), MENU_TENANTS);
@@ -111,6 +115,8 @@ public class TenantServiceImpl extends RemoteServiceServlet implements TenantSer
 
 	@Override
 	public GUITenant load(long paramLong) throws ServerException {
+
+		log.info("load tenant: " + paramLong);
 		try {
 			GUITenant localGUITenant = SecurityServiceImpl.getTenant(paramLong);
 			SequenceDAO localSequenceDAO = (SequenceDAO) Context.get().getBean(SequenceDAO.class);
@@ -124,6 +130,7 @@ public class TenantServiceImpl extends RemoteServiceServlet implements TenantSer
 				localGUITenant.setAdminUsername(localUser.getUsername());
 			} catch (NullPointerException localNullPointerException) {
 			}
+			log.info("load branding: " + paramLong);
 			localGUITenant.setBranding(loadBranding(paramLong));
 			return localGUITenant;
 		} catch (Throwable localThrowable) {
@@ -132,10 +139,8 @@ public class TenantServiceImpl extends RemoteServiceServlet implements TenantSer
 	}
 
 	public GUIBranding loadBranding(long paramLong) {
+		log.info("loadBranding: " + paramLong);
 		GUIBranding localGUIBranding = new GUIBranding();
-		boolean bool1 = true; // LicenseManager.getInstance().isEnabled("Feature_6");
-		boolean bool2 = false; // LicenseManager.getInstance().isEnabled("Feature_37");
-		boolean bool3 = true; // LicenseManager.getInstance().isEnabled("Feature_38");
 		/*
 		 * if
 		 * (StringUtils.isNotEmpty(LicenseManager.getInstance().getFeature("Product")))
@@ -184,18 +189,22 @@ public class TenantServiceImpl extends RemoteServiceServlet implements TenantSer
 		 * localGUIBranding.setForum(LicenseManager.getInstance().getFeature("Forum"));
 		 * }
 		 */
-		if (!bool1) {
+		if (!isBrandingStandardEnabled) {
+			log.info("isBrandingStandardEnabled is false.");
 			return localGUIBranding;
 		}
 		BrandingDAO localBrandingDAO = (BrandingDAO) Context.get().getBean(BrandingDAO.class);
 		Branding localBranding = localBrandingDAO.findByTenantId(paramLong);
 		if (localBranding != null) {
-			if (bool3) {
+			if (isBrandingLogoEnabled) {
+				log.info("branding data is valid.");
 				if (StringUtils.isNotEmpty(localBranding.getLogo())) {
 					localGUIBranding.setLogoSrc(localBranding.getLogo());
+					log.info("logo data is valid.");
 				}
 				if (StringUtils.isNotEmpty(localBranding.getLogoHead())) {
 					localGUIBranding.setLogoHeadSrc(localBranding.getLogoHead());
+					log.info("logo head data is valid.");
 				}
 				if (StringUtils.isNotEmpty(localBranding.getBanner())) {
 					localGUIBranding.setBannerSrc(localBranding.getBanner());
@@ -210,7 +219,7 @@ public class TenantServiceImpl extends RemoteServiceServlet implements TenantSer
 			if (StringUtils.isNotEmpty(localBranding.getLogoHeadOem())) {
 				localGUIBranding.setLogoHeadOemSrc(localBranding.getLogoHeadOem());
 			}
-			if (bool2) {
+			if (isBrandingFullEnabled) {
 				if (StringUtils.isNotEmpty(localBranding.getProduct())) {
 					localGUIBranding.setProduct(localBranding.getProduct());
 				}
@@ -266,10 +275,12 @@ public class TenantServiceImpl extends RemoteServiceServlet implements TenantSer
 			return;
 		}
 		checkMenuPermissions(tenantId);
-		boolean bool1 = true; // LicenseManager.getInstance().isEnabled("Feature_6");
-		boolean bool2 = false; // LicenseManager.getInstance().isEnabled("Feature_37");
-		boolean bool3 = true; // LicenseManager.getInstance().isEnabled("Feature_38");
-		if (!bool1) {
+		// boolean bool1 = true; // LicenseManager.getInstance().isEnabled("Feature_6");
+		// boolean bool2 = false; //
+		// LicenseManager.getInstance().isEnabled("Feature_37");
+		// boolean bool3 = true; //
+		// LicenseManager.getInstance().isEnabled("Feature_38");
+		if (!isBrandingStandardEnabled) {
 			return;
 		}
 		BrandingDAO localBrandingDAO = (BrandingDAO) Context.get().getBean(BrandingDAO.class);
@@ -280,13 +291,13 @@ public class TenantServiceImpl extends RemoteServiceServlet implements TenantSer
 		}
 		localBranding.setLogoOem(paramGUIBranding.getLogoOem());
 		localBranding.setLogoHeadOem(paramGUIBranding.getLogoHeadOem());
-		if (bool3) {
+		if (isBrandingLogoEnabled) {
 			localBranding.setLogo(paramGUIBranding.getLogo());
 			localBranding.setLogoHead(paramGUIBranding.getLogoHead());
 			localBranding.setBanner(paramGUIBranding.getBanner());
 			localBranding.setFavicon(paramGUIBranding.getFavicon());
 		}
-		if (bool2) {
+		if (isBrandingFullEnabled) {
 			localBranding.setProduct(paramGUIBranding.getProduct());
 			localBranding.setProductName(paramGUIBranding.getProductName());
 			localBranding.setVendor(paramGUIBranding.getVendor());

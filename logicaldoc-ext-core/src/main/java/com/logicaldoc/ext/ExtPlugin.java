@@ -28,7 +28,11 @@ public class ExtPlugin extends LogicalDOCPlugin {
 		// Register the needed servlets
 		File dest = new File(getPluginPath());
 		dest = dest.getParentFile().getParentFile();
+		
 		WebConfigurator config = new WebConfigurator(dest.getPath() + "/web.xml");
+		
+		config.addServlet("InfoService", InfoServiceExt.class.getName());
+		config.writeXMLDoc();
 		
 		config.addServlet("TenantService", TenantServiceImpl.class.getName());
 		config.addServletMapping("TenantService", "/frontend/tenant");

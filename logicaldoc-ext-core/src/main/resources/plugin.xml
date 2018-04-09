@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <!DOCTYPE plugin PUBLIC "-//JPF//Java Plug-in Manifest 1.0" "http://jpf.sourceforge.net/plugin_1_0.dtd">
-<plugin id="logicaldoc-ext-core" version="7.7.5" class="com.logicaldoc.ext.ExtPlugin">
+<plugin id="logicaldoc-ext-core" version="7.7.3" class="com.logicaldoc.ext.ExtPlugin">
 	<requires>
 		<import plugin-id="logicaldoc-core" />
 	</requires>
@@ -16,6 +16,10 @@
   <!-- BRANDING_STANDARD -->
   <extension plugin-id="logicaldoc-core" point-id="Feature" id="f6">
 	    <parameter id="name" value="Feature_6" />
+  </extension>
+  <!-- BRANDING_FULL -->
+  <extension plugin-id="logicaldoc-core" point-id="Feature" id="f37">
+	    <parameter id="name" value="Feature_37" />
   </extension>
   <!-- BRANDING_LOGO -->
   <extension plugin-id="logicaldoc-core" point-id="Feature" id="f38">
