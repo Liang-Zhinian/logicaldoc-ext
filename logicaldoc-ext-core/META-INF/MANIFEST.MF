@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: logicaldoc-ext-core
+Bundle-SymbolicName: logicaldoc-ext-core
+Bundle-Version: 1.0.0.qualifier
+Bundle-ClassPath: logicaldoc-ext-core.jar,
+  Java/JavaVirtualMachines/jdk1.8.0_151.jdk/Contents/Home/lib/tools.jar
+Export-Package: com,
+ com.logicaldoc,
+ com.logicaldoc.core.security.dao,
+ com.logicaldoc.ext,
+ com.logicaldoc.ext.branding,
+ com.logicaldoc.ext.tenant,
+ context,
+ mappings
