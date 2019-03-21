@@ -1,0 +1,2 @@
+serviceClass: com.logicaldoc.gui.common.client.services.SecurityService
+path: 5B13AF0404055EEB2FA631FAE1C2C515.gwt.rpc

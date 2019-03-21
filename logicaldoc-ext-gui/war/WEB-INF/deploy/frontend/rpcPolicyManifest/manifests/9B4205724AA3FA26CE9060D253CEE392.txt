@@ -1,0 +1,2 @@
+serviceClass: com.logicaldoc.gui.frontend.client.services.ZohoService
+path: CB6FDB9EB793BF8C2322497146ED483D.gwt.rpc

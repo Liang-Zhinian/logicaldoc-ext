@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="maven-antrun-" default="main"  >
+<target name="main">
+  <unzip src="target/logicaldoc-ext-gui-8.1.1.jar" dest="target/api"/>
+  <copy todir="target/api">
+    <fileset dir="src/main/java">
+      <include name="**/*.java"/>
+    </fileset>
+  </copy>
+  <zip basedir="target/api" destfile="target/logicaldoc-ext-gui-8.1.1.jar"/>
+  <delete dir="target/tmp"/>
+  <mkdir dir="target/tmp"/>
+  <unzip src="target/logicaldoc-ext-gui-8.1.1.jar" dest="target/tmp"/>
+  <delete dir="target/tmp/com/logicaldoc/gui"/>
+  <zip basedir="target/tmp" destfile="target/logicaldoc-ext-gui-8.1.1.jar"/>
+  <delete quiet="true" dir="target/plugin"/>
+  <unzip src="target/logicaldoc-ext-gui-8.1.1-plugin.zip" dest="target/plugin"/>
+  <delete dir="target/arget/plugin/i18n"/>
+  <delete dir="target/logicaldoc-ext-gui-8.1.1-plugin.zip"/>
+  <mkdir dir="target/plugin/WEB-INF/lib"/>
+  <copy file="target/logicaldoc-ext-gui-8.1.1.jar" todir="target/plugin/WEB-INF/lib/"/>
+  <move file="target/plugin/WEB-INF/lib/logicaldoc-ext-gui-8.1.1.jar" tofile="target/plugin/WEB-INF/lib/logicaldoc-ext-gui-8.1.1-plugin.jar"/>
+  <delete dir="target/plugin/WEB-INF/lib/com"/>
+  <copy todir="target/plugin/frontend/sc/skins/Simplicity" overwrite="true">
+    <fileset includes="**" dir="war/skin"/>
+  </copy>
+  <zip basedir="target/plugin" destfile="target/logicaldoc-ext-gui-8.1.1-plugin2.zip"/>
+  <move file="target/logicaldoc-ext-gui-8.1.1-plugin2.zip" tofile="target/logicaldoc-ext-gui-8.1.1-plugin.zip"/>
+</target>
+</project>

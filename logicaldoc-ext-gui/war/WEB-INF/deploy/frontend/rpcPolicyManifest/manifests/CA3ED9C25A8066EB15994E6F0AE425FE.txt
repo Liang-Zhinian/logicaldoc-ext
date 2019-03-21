@@ -1,0 +1,2 @@
+serviceClass: com.logicaldoc.gui.frontend.client.services.LdapService
+path: 06CA6B5E1E224AD4812FBE4F70AC4C43.gwt.rpc

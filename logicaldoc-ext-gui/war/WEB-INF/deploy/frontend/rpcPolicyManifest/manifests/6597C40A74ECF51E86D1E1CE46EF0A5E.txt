@@ -1,0 +1,2 @@
+serviceClass: com.logicaldoc.gui.frontend.client.services.SearchService
+path: 4EE75F736C4728A17FC7C467193F7E58.gwt.rpc

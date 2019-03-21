@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<parent>
+	  <groupId>com.logicaldoc</groupId>
+	  <artifactId>logicaldoc-ext</artifactId>
+	  <version>8.1.1</version>
+	</parent>
+
+    <artifactId>logicaldoc-ext-gui</artifactId>
+    <name>logicaldoc-ext-gui</name>
+    <packaging>jar</packaging>
+	<properties>
+		<gwt.output.directory>./war</gwt.output.directory>
+	</properties>
+	<dependencies>
+      <dependency>
+         <groupId>com.logicaldoc</groupId>
+         <artifactId>logicaldoc-gui</artifactId>
+         <version>${project.version}</version>
+         <type>jar</type>
+      </dependency>
+      <dependency>
+         <groupId>com.logicaldoc</groupId>
+         <artifactId>logicaldoc-util</artifactId>
+         <version>${project.version}</version>
+      </dependency>
+      <dependency>
+         <groupId>com.logicaldoc</groupId>
+         <artifactId>logicaldoc-core</artifactId>
+         <version>${project.version}</version>
+      </dependency>
+      <dependency>
+         <groupId>com.logicaldoc</groupId>
+         <artifactId>logicaldoc-webapp</artifactId>
+         <version>${project.version}</version>
+         <type>jar</type>
+         <classifier>api</classifier>
+      </dependency>
+      <dependency>
+         <groupId>com.logicaldoc</groupId>
+         <artifactId>logicaldoc-ext-core</artifactId>
+         <version>${project.version}</version>
+         <type>jar</type>
+      </dependency>
+      <dependency>
+         <groupId>com.google.gwt</groupId>
+         <artifactId>gwt-servlet</artifactId>
+         <scope>provided</scope>
+      </dependency>
+      <dependency>
+         <groupId>com.google.gwt</groupId>
+         <artifactId>gwt-user</artifactId>
+         <scope>provided</scope>
+      </dependency>
+      <dependency>
+         <groupId>com.googlecode.gwtupload</groupId>
+         <artifactId>gwtupload</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>com.smartgwt</groupId>
+         <artifactId>smartgwt</artifactId>
+         <scope>provided</scope>
+      </dependency>
+      <dependency>
+         <groupId>com.smartgwt</groupId>
+         <artifactId>smartgwt-skins</artifactId>
+         <scope>provided</scope>
+      </dependency>
+      <dependency>
+         <groupId>org.slf4j</groupId>
+         <artifactId>slf4j-log4j12</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>commons-codec</groupId>
+         <artifactId>commons-codec</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>commons-fileupload</groupId>
+         <artifactId>commons-fileupload</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>commons-digester</groupId>
+         <artifactId>commons-digester</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>javax.servlet</groupId>
+         <artifactId>servlet-api</artifactId>
+         <scope>provided</scope>
+      </dependency>
+      <dependency>
+         <groupId>commons-validator</groupId>
+         <artifactId>commons-validator</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>commons-lang</groupId>
+         <artifactId>commons-lang</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>commons-beanutils</groupId>
+         <artifactId>commons-beanutils</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>commons-io</groupId>
+         <artifactId>commons-io</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>net.sf.jpf</groupId>
+         <artifactId>jpf-boot</artifactId>
+         <scope>provided</scope>
+      </dependency>
+      <dependency>
+         <groupId>net.sf.jpf</groupId>
+         <artifactId>jpf</artifactId>
+         <scope>provided</scope>
+      </dependency>
+      <dependency>
+         <groupId>org.apache.httpcomponents</groupId>
+         <artifactId>httpclient</artifactId>
+      </dependency>
+   </dependencies>
+   <build>
+      <outputDirectory>${gwt.output.directory}/WEB-INF/classes</outputDirectory>
+      <plugins>
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-source-plugin</artifactId>
+            <version>2.2.1</version>
+            <executions>
+               <execution>
+                  <id>attach-sources</id>
+                  <phase>make-assembly</phase>
+                  <goals>
+                     <goal>jar</goal>
+                  </goals>
+               </execution>
+            </executions>
+         </plugin>
+         <plugin>
+            <artifactId>maven-assembly-plugin</artifactId>
+            <version>2.5.3</version>
+            <configuration>
+               <descriptors>
+                  <descriptor> src/main/assembly/assemblyplugin.xml 
+                  </descriptor>
+               </descriptors>
+            </configuration>
+            <executions>
+               <execution>
+                  <id>make-assembly</id>
+                  <phase>package</phase>
+                  <goals>
+                     <goal>attached</goal>
+                  </goals>
+               </execution>
+            </executions>
+         </plugin>
+         <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>gwt-maven-plugin</artifactId>
+            <version>${gwt.version}</version>
+            <configuration>
+               <webappDirectory>./war</webappDirectory>
+               <webXml>./war/WEB-INF/web.xml</webXml>
+               <hostedWebapp>./war</hostedWebapp>
+               <modules>
+			   <!--
+                  <module>com.logicaldoc.ext.gui.license.License</module>
+                  <module>com.logicaldoc.ext.gui.sessions.Sessions</module>
+                  <module>com.logicaldoc.ext.gui.mobile.Mobile</module>
+				  -->
+               </modules>
+            </configuration>
+            <executions>
+               <execution>
+                  <phase>process-classes</phase>
+                  <goals>
+                     <goal>compile</goal>
+                     <goal>eclipse</goal>
+                     <goal>eclipseTest</goal>
+                  </goals>
+               </execution>
+               <execution>
+                  <id>integration-test-gwt</id>
+                  <phase>integration-test</phase>
+                  <goals>
+                     <goal>test</goal>
+                  </goals>
+               </execution>
+            </executions>
+         </plugin>
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-war-plugin</artifactId>
+            <version>2.1.1</version>
+            <!-- Include GWT compiler output in the war -->
+            <configuration>
+               <warSourceDirectory>./war</warSourceDirectory>
+               <packagingExcludes>**/WEB-INF</packagingExcludes>
+               <useCache>false</useCache>
+               <archive>
+                  <addMavenDescriptor>false</addMavenDescriptor>
+               </archive>
+               <webXml>./war/WEB-INF/web.xml</webXml>
+            </configuration>
+         </plugin>
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <version>1.7</version>
+            <executions>
+               <execution>
+                  <id>package</id>
+                  <phase>package</phase>
+                  <goals>
+                     <goal>run</goal>
+                  </goals>
+                  <configuration>
+                     <target>
+                        <unzip src="target/${project.artifactId}-${project.version}.jar" dest="target/api" />
+                        <copy todir="target/api">
+                           <fileset dir="src/main/java">
+                              <include name="**/*.java" />
+                           </fileset>
+                        </copy>
+                        <zip destfile="target/${project.artifactId}-${project.version}.jar" basedir="target/api" />
+                     
+                        <!-- Eclipse compiles all .java in the dependencies jars -->
+                        <delete dir="target/tmp" />
+                        <mkdir dir="target/tmp" />
+                        <unzip src="target/${project.artifactId}-${project.version}.jar" dest="target/tmp" />
+                        <delete dir="target/tmp/com/logicaldoc/gui" />
+                        <zip destfile="target/${project.artifactId}-${project.version}.jar" basedir="target/tmp" />
+                        <delete dir="target/plugin" quiet="true" />
+                        <unzip src="target/${project.artifactId}-${project.version}-plugin.zip" dest="target/plugin" />
+                        <delete dir="target/arget/plugin/i18n" />
+                        <delete dir="target/${project.artifactId}-${project.version}-plugin.zip" />
+                        <mkdir dir="target/plugin/WEB-INF/lib" />
+                        <copy file="target/${project.artifactId}-${project.version}.jar" todir="target/plugin/WEB-INF/lib/" />
+                        <move file="target/plugin/WEB-INF/lib/${project.artifactId}-${project.version}.jar" tofile="target/plugin/WEB-INF/lib/${project.artifactId}-${project.version}-plugin.jar" />
+                        <delete dir="target/plugin/WEB-INF/lib/com" />
+                        
+                        <!-- Copy static resources in the skins -->
+                        <copy todir="target/plugin/frontend/sc/skins/Simplicity" overwrite="true">
+                           <fileset dir="war/skin" includes="**" />
+                        </copy>
+                        <!-- 
+                        <copy todir="target/plugin/mobile/sc/skins/Enterprise" overwrite="true">
+                           <fileset dir="war/skin" includes="**" />
+                        </copy>
+                        <copy todir="target/plugin/mobile/sc/skins/Simplicity" overwrite="true">
+                           <fileset dir="war/skin" includes="**" />
+                        </copy>
+                        <copy todir="target/plugin/mobile/sc/skins/Tahoe" overwrite="true">
+                           <fileset dir="war/skin" includes="**" />
+                        </copy>
+                        -->
+                        <zip destfile="target/${project.artifactId}-${project.version}-plugin2.zip" basedir="target/plugin" />
+                        <move file="target/${project.artifactId}-${project.version}-plugin2.zip" tofile="target/${project.artifactId}-${project.version}-plugin.zip" />
+                     </target>
+                  </configuration>
+               </execution>
+               <execution>
+                  <id>clean</id>
+                  <phase>clean</phase>
+                  <goals>
+                     <goal>run</goal>
+                  </goals>
+                  <configuration>
+                     <tasks>
+                        <delete dir="war/mobile" quiet="true" />
+                        <delete dir="war/license" quiet="true" />
+                        <delete dir="war/sessions" quiet="true" />
+                        <delete dir="war/WEB-INF/deploy" quiet="true" />
+                     </tasks>
+                  </configuration>
+               </execution>               
+            </executions>
+         </plugin>
+      </plugins>
+   </build>
+   <reporting>
+      <plugins>
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <version>2.7</version>
+         </plugin>
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-dependency-plugin</artifactId>
+            <version>2.1</version>
+         </plugin>
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-project-info-reports-plugin</artifactId>
+            <version>2.3.1</version>
+            <reportSets>
+               <reportSet>
+                  <reports>
+                     <report>dependencies</report>
+                     <!-- <report>project-team</report> <report>mailing-list</report> <report>cim</report> <report>issue-tracking</report> <report>license</report> <report>scm</report> -->
+                  </reports>
+               </reportSet>
+            </reportSets>
+         </plugin>
+      </plugins>
+   </reporting>
+</project>

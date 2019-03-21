@@ -10,8 +10,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.sql.DataSource;
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateUtils;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 
 import com.logicaldoc.core.HibernatePersistentObjectDAO;
@@ -351,13 +354,26 @@ public class HibernateTenantDAO extends HibernatePersistentObjectDAO<Tenant> imp
 	
 	@Override
 	public String getTenantName(long tenantId) {
-		// TODO Auto-generated method stub
-		return null;
+		Tenant tenant = findById(tenantId);
+		
+		return tenant.getName();
 	}
 
 	@Override
 	public SqlRowSet queryForRowSet(String sql, Object[] args, Integer maxRows) {
-		// TODO Auto-generated method stub
-		return null;
+		SqlRowSet rs = null;
+		try {
+			DataSource dataSource = (DataSource) Context.get().getBean("DataSource");
+			JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+			if (maxRows != null)
+				jdbcTemplate.setMaxRows(maxRows);
+			if (args != null)
+				rs = jdbcTemplate.queryForRowSet(insertTopClause(sql, maxRows), args);
+			else
+				rs = jdbcTemplate.queryForRowSet(insertTopClause(sql, maxRows));
+		} catch (Throwable e) {
+			log.error(e.getMessage(), e);
+		}
+		return rs;
 	}
 }

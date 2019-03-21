@@ -11,5 +11,6 @@
 	<packaging>pom</packaging>
 	<modules>
     <module>logicaldoc-ext-core</module>
+    <module>logicaldoc-ext-gui</module>
 	</modules>
 </project>

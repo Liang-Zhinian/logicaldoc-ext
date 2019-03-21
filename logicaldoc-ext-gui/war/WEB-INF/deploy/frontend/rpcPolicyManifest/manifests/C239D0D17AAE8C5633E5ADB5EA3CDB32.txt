@@ -1,0 +1,2 @@
+serviceClass: com.logicaldoc.gui.frontend.client.services.FolderService
+path: D3F2D1E4E785EF74A79C2099C7B727D0.gwt.rpc
