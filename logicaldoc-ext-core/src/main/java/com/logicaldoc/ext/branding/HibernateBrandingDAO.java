@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 import com.logicaldoc.core.HibernatePersistentObjectDAO;
 import com.logicaldoc.core.document.dao.HibernateDocumentDAO;
 
-@SuppressWarnings("unchecked")
 public class HibernateBrandingDAO extends HibernatePersistentObjectDAO<Branding> implements BrandingDAO {
 
 	protected HibernateBrandingDAO() {

@@ -12,6 +12,7 @@ import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateUtils;
+import org.springframework.jdbc.support.rowset.SqlRowSet;
 
 import com.logicaldoc.core.HibernatePersistentObjectDAO;
 import com.logicaldoc.core.PersistentObject;
@@ -344,5 +345,19 @@ public class HibernateTenantDAO extends HibernatePersistentObjectDAO<Tenant> imp
 					new Object[] { localLong, Long.valueOf(localGroup2.getId()) });
 		}
 		return localGroup2;
+	}
+
+	
+	
+	@Override
+	public String getTenantName(long tenantId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public SqlRowSet queryForRowSet(String sql, Object[] args, Integer maxRows) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

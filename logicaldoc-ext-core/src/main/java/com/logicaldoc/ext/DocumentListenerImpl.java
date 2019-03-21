@@ -4,7 +4,7 @@ import com.logicaldoc.core.RunLevel;
 import com.logicaldoc.core.document.Document;
 import com.logicaldoc.core.document.DocumentEvent;
 import com.logicaldoc.core.document.DocumentListener;
-import com.logicaldoc.core.document.History;
+import com.logicaldoc.core.document.DocumentHistory;
 import com.logicaldoc.core.document.dao.DocumentDAO;
 import com.logicaldoc.core.folder.Folder;
 import com.logicaldoc.core.folder.FolderDAO;
@@ -115,7 +115,7 @@ public class DocumentListenerImpl implements DocumentListener {
 	}
 
 	@Override
-	public void afterCheckin(Document paramDocument, History paramHistory, Map<String, Object> paramMap)
+	public void afterCheckin(Document paramDocument, DocumentHistory paramHistory, Map<String, Object> paramMap)
 			throws Exception {
 		if (paramDocument.getFileVersion().equals(paramDocument.getVersion())) {
 			increaseStorageSize(paramDocument, paramDocument.getFileSize());
@@ -127,7 +127,7 @@ public class DocumentListenerImpl implements DocumentListener {
 	}
 
 	@Override
-	public void afterStore(Document paramDocument, History paramHistory, Map<String, Object> paramMap)
+	public void afterStore(Document paramDocument, DocumentHistory paramHistory, Map<String, Object> paramMap)
 			throws Exception {
 		QuotaUpdate localQuotaUpdate = null;
 		if ("true".equals(paramMap.get("counter.newdoc"))) {
@@ -148,7 +148,7 @@ public class DocumentListenerImpl implements DocumentListener {
 	}
 
 	@Override
-	public void beforeCheckin(Document paramDocument, History paramHistory, Map<String, Object> paramMap)
+	public void beforeCheckin(Document paramDocument, DocumentHistory paramHistory, Map<String, Object> paramMap)
 			throws Exception {
 		validateDocumentsQuota(paramDocument.getTenantId(), paramDocument.getPublisherId(),
 				getWorkspaceId(paramDocument.getFolder().getId()));
@@ -162,7 +162,7 @@ public class DocumentListenerImpl implements DocumentListener {
 	}
 
 	@Override
-	public void beforeStore(Document paramDocument, History paramHistory, Map<String, Object> paramMap)
+	public void beforeStore(Document paramDocument, DocumentHistory paramHistory, Map<String, Object> paramMap)
 			throws Exception {
 		if (paramDocument.getId() == 0L) {
 			paramMap.put("counter.newdoc", "true");
